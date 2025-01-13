@@ -37,6 +37,21 @@ function validate(formData) {
 // https://www.robinwieruch.de/react-server-action-reset-form/ 
 export async function realAction(prevState, formData) {
 
+    // const nombre = formData.get("nombre")
+    // const edad = Number(formData.get("edad"))
+    // const email = formData.get("email")
+    // const telefono = formData.get("telefono")
+    // const fecha = formData.get("fecha")
+    // const comentario = Number(formData.get("comentario"))
+
+    // let issues = {}
+
+    // if (nombre.length < 1 || nombre.length > 5)
+    //     issues.nombre = "Introduzca nombre entre 1 y 5 letras"
+
+    // if (edad < 18 || edad > 65)
+    //     issues.edad = "Introduzca edade entre 18 y 65 años"
+
     const result = validate(formData)
     if (!result.success) {
         console.log('issues (en crudo) ', result.error.issues);

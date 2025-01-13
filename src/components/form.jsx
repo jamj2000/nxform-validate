@@ -18,11 +18,11 @@ function Formulario() {
 
 
     return (
-        <form action={action} className="my-20 border-2 p-4 flex flex-col gap-4">
+        <form action={action} className="my-20 border-2 p-4 flex flex-col gap-2">
             <h1 className="text-center text-xl">Formulario</h1>
 
 
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="nombre">Nombre:</label>
                 <input id="nombre" name="nombre" className="ring-2"
                     // pattern="[A-Za-zÑñÁÉÍÓÚáéíóú]{1,5}"
@@ -30,27 +30,32 @@ function Formulario() {
                     defaultValue={state.payload?.get("nombre") || ""}  // para recuperar el valor introducido previamente
                 />
             </div>
-            {/* {state?.issues?.nombre && state.issues.nombre} */}
+            {/* {state.issues?.nombre && state.issues.nombre} */}
             {/* Una presentación más elaborada */}
-            {state?.issues?.nombre &&
+            {state.issues?.nombre &&
                 < div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
-                    {<CircleAlert className="inline m-4 mr-2 size-4" />} {state.issues.nombre}
+                    <CircleAlert className="inline m-2 size-4" /> {state.issues.nombre}
                 </div>
             }
 
 
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="edad">Edad:</label>
                 <input type='number' id="edad" name="edad" className="ring-2"
                     defaultValue={state.payload?.get("edad") || ""}  // para recuperar el valor introducido previamente
                 // min={18} max={65}
                 />
             </div>
-            {state.issues?.edad && state.issues.edad}
+            {/* {state.issues?.edad && state.issues.edad} */}
+            {state.issues?.edad &&
+                < div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
+                    <CircleAlert className="inline m-2 size-4" /> {state.issues.edad}
+                </div>
+            }
 
 
-
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="email">Email:</label>
                 <input type='email' id="email" name="email" className="ring-2"
                     defaultValue={state.payload?.get("email") || ""}  // para recuperar el valor introducido previamente
@@ -60,7 +65,7 @@ function Formulario() {
 
 
 
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="telefono">Teléfono móvil:</label>
                 <input type='tel' id="telefono" name="telefono" className="ring-2"
                     defaultValue={state.payload?.get("telefono") || ""}  // para recuperar el valor introducido previamente
@@ -72,7 +77,7 @@ function Formulario() {
 
 
 
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="fecha">Fecha de incidencia:</label>
                 <input type="date" id="fecha" name="fecha" className="ring-2"
                     defaultValue={state.payload?.get("fecha") || new Date().toISOString().split('T')[0]}  // para recuperar el valor introducido previamente
@@ -83,7 +88,7 @@ function Formulario() {
 
 
 
-            <div className="flex justify-between px-4 py-2 rounded-md bg-slate-200">
+            <div className="flex justify-between px-4 py-2 rounded-md bg-indigo-100">
                 <label htmlFor="comentario">Comentario:</label>
                 <textarea id="comentario" name="comentario" className="ring-2"
                     defaultValue={state.payload?.get("comentario") || ""}  // para recuperar el valor introducido previamente
