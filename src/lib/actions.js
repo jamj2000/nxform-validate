@@ -38,6 +38,7 @@ function validate(formData) {
 export async function realAction(prevState, formData) {
 
     const result = validate(formData)
+
     if (!result.success) {
         console.log('issues (en crudo) ', result.error.issues);
         const simplified = result.error.issues.map(issue => [issue.path[0], issue.message])
