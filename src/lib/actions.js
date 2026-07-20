@@ -2,8 +2,11 @@
 
 import { z } from "zod";
 
-const schema = z.object({
-    id: z.union([z.coerce.number(), z.string().nullish()]),
+const DataSchema = z.object({
+    id: z.union([
+        z.coerce.number(),
+        z.string().nullish()
+    ]),
     nombre: z.string()
         .trim()
         .min(1, "Al menos debe tener una letra")
@@ -27,6 +30,11 @@ const schema = z.object({
         .optional(),
     hobbies: z.array(z.string())
         .min(1, "Debes marcar al menos un hobbie"),
+    nivel: z.enum(["AMATEUR", "JUNIOR", "SENIOR", "VETERANO"], "Debes seleccionar un nivel"),
+    ciudad: z.union([
+        z.enum(["MADRID", "BARCELONA", "VALENCIA", "SEVILLA"]),
+        z.string().nullish()
+    ]),
     condiciones: z.boolean()
         .refine((v) => v === true, "Debes aceptar las condiciones")
 }).refine(({ password, confirmPassword }) => password === confirmPassword, {
@@ -39,6 +47,7 @@ const schema = z.object({
 
 export async function realAction(prevState, formData) {
 
+    // LEEMOS DATOS
     const data = {
         nombre: formData.get("nombre"),
         password: formData.get("password"),
@@ -49,28 +58,32 @@ export async function realAction(prevState, formData) {
         fecha: formData.get("fecha"),
         comentario: formData.get("comentario"),
         hobbies: formData.getAll("hobbies"),                  // getAll devuelve un array con los valores de los checkboxes marcados
+        nivel: formData.get("nivel"),
+        ciudad: formData.get("ciudad"),
         condiciones: formData.get("condiciones") === "true",  // true o false
     }
 
-    const result = schema.safeParse(data)
+
+    // VALIDAMOS DATOS
+    const result = DataSchema.safeParse(data)
     // https://zod.dev/ERROR_HANDLING?id=zodparsedtype
     // result puede ser de 2 tipos:
     // { success: true, data: z.infer<typeof schema> } 
     // { success: false, error: issues[] }  
 
 
+    // SI HAY ERRORES: devolvemos un objeto con las propiedades errors y values
     if (!result.success) {
-        // https://zod.dev/error-formatting?id=zflattenerror#zflattenerror
-        const { formErrors, fieldErrors } = z.flattenError(result.error);
-
-        console.log('FieldErrors ', fieldErrors);
+        const { formErrors, fieldErrors } = z.flattenError(result.error);   // https://zod.dev/error-formatting?id=zflattenerror#zflattenerror
+        // console.log('FieldErrors ', fieldErrors);
         return { errors: fieldErrors, values: data }
     }
 
 
+    // REALIZAMOS LA ACCIÓN SOBRE result.data
     try {
         // Hacemos algo (guardar en BD, enviar a API, ...) con result.data
-        console.log('result.data ', result.data);
+        // console.log('result.data ', result.data);
         return { success: 'Éxito al realizar acción' }
     } catch (error) {
         console.log("Error:", error);
