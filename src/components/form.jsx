@@ -180,7 +180,7 @@ export default function Formulario() {
             <button
                 disabled={pending}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-4 mt-4 hover:bg-blue-700 cursor-pointer" >
-                {pending ? <RefreshCcw className="inline animate-spin size-4" /> : 'Insertar'}
+                {pending ? <RefreshCcw className="inline animate-spin size-4" /> : 'Enviar'}
             </button>
 
         </form >
