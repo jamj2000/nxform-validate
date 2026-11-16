@@ -93,8 +93,8 @@ export default function Formulario() {
 
             <div className="grid grid-cols-2 gap-2 px-4 py-2 rounded-md bg-indigo-50">
                 <label htmlFor="telefono">Teléfono móvil:</label>
-                <input type='tel' id="telefono" name="telefono" className="ring-2 ring-blue-200 focus:ring-blue-300 focus:outline-none px-2 py-0.5 rounded-sm"
-                    // pattern="[678]{1}[0-9]{8}"
+                <input type='tel' id="telefono" name="telefono" className="ring-2 ring-blue-200 focus:ring-blue-300 focus:outline-none px-2 py-0.5 rounded-sm invalid:bg-red-100 valid:bg-green-100"
+                    // pattern="^[678]{1}[0-9]{8}$"
                     // title="9 dígitos, siendo el primero 6,7 u 8"
                     defaultValue={state.values?.telefono}  // para recuperar el valor introducido previamente
                 />
@@ -180,7 +180,7 @@ export default function Formulario() {
             <button
                 disabled={pending}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-4 mt-4 hover:bg-blue-700 cursor-pointer" >
-                {pending ? <RefreshCcw className="inline animate-spin size-4" /> : 'Enviar'}
+                {pending ? <RefreshCcw className="inline animate-spin size-4" /> : 'Insertar'}
             </button>
 
         </form >
